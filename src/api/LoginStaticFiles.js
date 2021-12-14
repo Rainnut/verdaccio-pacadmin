@@ -5,7 +5,7 @@ const
     {constants: {R_OK: readable, F_OK: visible}, promises: {access}} = require('fs'),
     ROUTE = '/-/pacman/web/login/',
     STATIC_FILE_ROOT = join(__dirname, '../web/login'),
-    SCRIPT = posixJoin(ROUTE, 'index.js'),
+    // SCRIPT = posixJoin(ROUTE, 'index.js'),
     STYLES = posixJoin(ROUTE, 'styles.css');
 
 class LoginStaticFiles
@@ -32,7 +32,7 @@ class LoginStaticFiles
     static inject (node)
     {
         node.append(`<link rel="stylesheet" type="text/css" href="${STYLES}">`);
-        node.append(`<script type="module" src="${SCRIPT}" id="pacmanLogin" data-options=""></script>`);
+        // node.append(`<script type="module" src="${SCRIPT}" id="pacmanLogin" data-options=""></script>`);
     }
 
     /**

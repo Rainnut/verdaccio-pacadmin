@@ -1,6 +1,7 @@
 'use strict';
-const YAML = require("yaml");
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
+const YAML = require('yaml');
 // noinspection JSUnusedGlobalSymbols
 class Utils {
   /**
@@ -144,12 +145,37 @@ class Utils {
     if (!group || !auth) return result;
 
     try {
-        const authUserPath = auth.config.auth.groups.file;
-        const file = fs.readFileSync(authUserPath, "utf8");
-        const auth = YAML.parse(file);
-        result = auth.groups[group];
+      const authUserPath = auth.config.auth.groups.file;
+      const file = fs.readFileSync(authUserPath, "utf8");
+      const authData = YAML.parse(file);
+      result = authData.groups[group];
     } catch (error) {
-        console.log(error);
+      console.log(error);
+    }
+    return result;
+  }
+
+  /**
+   * 获取用户的密码hash
+   */
+  static getUserHtpasswd(auth, username) {
+    if (!username || !auth) return null;
+
+    let result;
+    try {
+      const htpasswdPath = path.resolve(auth.config.self_path, '..', auth.config.auth.htpasswd.file);
+      const file = fs.readFileSync(htpasswdPath, "utf8");
+      const users = file.split('\n').filter(item => item).map(item => {
+        const arr = item.split(':');
+        return {
+          username: arr[0],
+          hash: arr[1]
+        }
+      });
+      const uItem = users.find(item => item.username === username);
+      result = uItem ? uItem.hash : null;
+    } catch (error) {
+      console.log(error);
     }
     return result;
   }

@@ -5,6 +5,7 @@ const ModuleLoader = require("./api/ModuleLoader"),
   LoginStaticFiles = require("./api/LoginStaticFiles"),
   Injector = require("./api/Injector"),
   Pacman = require("./api/Pacman"),
+  Htpasswd = require("./api/Htpasswd"),
   Utils = require("./Utils"),
   Defaults = {
     enabled: false,
@@ -49,14 +50,12 @@ class Plugin
         if (!this._config.enabled) {
             return;
         }
-        console.log("pacadmin");
-        // console.log(auth.config.auth.groups);
-        // Utils.getAuthGroupUsers(auth, "superAdmin");
         ModuleLoader.register(app);
         Injector.register(app, this._config);
         StaticFiles.register(app);
-        // LoginStaticFiles.register(app);
         Pacman.register(app, storage, this._config);
+        LoginStaticFiles.register(app);
+        Htpasswd.register(app, auth);
     }
 }
 

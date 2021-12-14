@@ -20,7 +20,7 @@ class StaticFiles
         try {
             const {file} = req.params;
             await access(join(STATIC_FILE_ROOT, file), readable | visible);
-            console.log("staticFiles._fileLoader", file, STATIC_FILE_ROOT);
+            // console.log("staticFiles._fileLoader", file, STATIC_FILE_ROOT);
             res.sendFile(file, {root: STATIC_FILE_ROOT});
         } catch (err) {
             res.sendStatus(404);

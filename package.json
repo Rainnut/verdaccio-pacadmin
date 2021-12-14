@@ -24,6 +24,7 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "cheerio": "^1.0.0-rc.3",
+        "crypto": "^1.0.1",
         "yaml": "^1.10.2",
         "zinggrid": "^1.2.2"
     }
