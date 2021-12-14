@@ -3,12 +3,12 @@
 const
     {posix: {join: posixJoin}, join} = require('path'),
     {constants: {R_OK: readable, F_OK: visible}, promises: {access}} = require('fs'),
-    ROUTE = '/-/pacman/web/',
-    STATIC_FILE_ROOT = join(__dirname, '../web'),
-    SCRIPT = posixJoin(ROUTE, 'pacman.js'),
+    ROUTE = '/-/pacman/web/login/',
+    STATIC_FILE_ROOT = join(__dirname, '../web/login'),
+    SCRIPT = posixJoin(ROUTE, 'index.js'),
     STYLES = posixJoin(ROUTE, 'styles.css');
 
-class StaticFiles
+class LoginStaticFiles
 {
     /**
      * @param {Request} req
@@ -20,7 +20,6 @@ class StaticFiles
         try {
             const {file} = req.params;
             await access(join(STATIC_FILE_ROOT, file), readable | visible);
-            console.log("staticFiles._fileLoader", file, STATIC_FILE_ROOT);
             res.sendFile(file, {root: STATIC_FILE_ROOT});
         } catch (err) {
             res.sendStatus(404);
@@ -33,7 +32,7 @@ class StaticFiles
     static inject (node)
     {
         node.append(`<link rel="stylesheet" type="text/css" href="${STYLES}">`);
-        node.append(`<script type="module" src="${SCRIPT}" id="pacman" data-options=""></script>`);
+        node.append(`<script type="module" src="${SCRIPT}" id="pacmanLogin" data-options=""></script>`);
     }
 
     /**
@@ -41,8 +40,8 @@ class StaticFiles
      */
     static register (app)
     {
-        app.get(posixJoin(ROUTE, ':file'), StaticFiles._fileLoader);
+        app.get(posixJoin(ROUTE, ":file"), LoginStaticFiles._fileLoader);
     }
 }
 
-module.exports = StaticFiles;
+module.exports = LoginStaticFiles;
