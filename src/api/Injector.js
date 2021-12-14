@@ -1,12 +1,13 @@
 'use strict';
 
-const
-    {load: cheerio} = require('cheerio'),
-    ModuleLoader = require('./ModuleLoader'),
-    StatisFiles = require('./StaticFiles'),
-    CSP_HEADER = 'Content-Security-Policy',
-    ZingGridLicenseValidationUrl = 'https://app.zingsoft.com/v1/api/license/validate',
-    HTML_MIME = 'text/html';
+const { load: cheerio } = require("cheerio"),
+  ModuleLoader = require("./ModuleLoader"),
+  StatisFiles = require("./StaticFiles"),
+  LoginStatisFiles = require("./LoginStaticFiles"),
+  CSP_HEADER = "Content-Security-Policy",
+  ZingGridLicenseValidationUrl =
+    "https://app.zingsoft.com/v1/api/license/validate",
+  HTML_MIME = "text/html";
 
 class Injector
 {
@@ -38,8 +39,9 @@ class Injector
 
                 try {
                     $body.append(`<data id="pacman-options" value='${JSON.stringify(options)}'></data>`);
-
+                    console.log("Injector");
                     StatisFiles.inject($body);
+                    // LoginStatisFiles.inject($body);
                     ModuleLoader.inject($body);
 
                     send($.html());

@@ -3,26 +3,29 @@
 import TagType from './TagType.js';
 import ListGrid from './ListGrid.js';
 import PackageGrid from './PackageGrid.js';
-
+import Login from './Login/index';
 class Pacman
 {
     constructor ()
     {
-        const
-            options = JSON.parse((document.querySelector('#pacman-options') || {}).value || '{}'),
-            button = document.createElement('button'),
-            toolbarLeftSide = document.querySelector(options.selectorPacmanBtn),
-            homeButton = document.querySelector(options.selectorHomeBtn);
+      const options = JSON.parse(
+          (document.querySelector("#pacman-options") || {}).value || "{}"
+        ),
+        button = document.createElement("button"),
+        toolbarLeftSide = document.querySelector(options.selectorPacmanBtn),
+        homeButton = document.querySelector(options.selectorHomeBtn);
 
-        this._options = options;
+      this._options = options;
+      console.log("1111111");
+      button.setAttribute("class", "pacman open");
 
-        button.setAttribute('class', 'pacman open');
-        button.addEventListener('click', this._load.bind(this));
+      // button.addEventListener("click", Login._load.bind(this));
+      button.addEventListener("click", this._load.bind(this));
 
-        options.injectMode === 'prepend' && toolbarLeftSide.prepend(button);
-        options.injectMode === 'append' && toolbarLeftSide.append(button);
+      options.injectMode === "prepend" && toolbarLeftSide.prepend(button);
+      options.injectMode === "append" && toolbarLeftSide.append(button);
 
-        homeButton.addEventListener('click', () => location.assign('/'));
+      homeButton.addEventListener("click", () => location.assign("/"));
     }
 
     /**
