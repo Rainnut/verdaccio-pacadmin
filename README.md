@@ -1,16 +1,16 @@
-# verdaccio-pacman
+# verdaccio-pacadmin
 Verdaccio Middleware Plugin to manage tags and versions of packages
 
-[![verdaccio-pacman (latest)](https://img.shields.io/npm/v/verdaccio-pacman/latest.svg)](https://www.npmjs.com/package/verdaccio-pacman)
+[![verdaccio-pacadmin (latest)](https://img.shields.io/npm/v/verdaccio-pacadmin/latest.svg)](https://www.npmjs.com/package/verdaccio-pacadmin)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![node](https://img.shields.io/node/v/verdaccio-pacman/latest.svg)](https://www.npmjs.com/package/verdaccio-pacman)
+[![node](https://img.shields.io/node/v/verdaccio-pacadmin/latest.svg)](https://www.npmjs.com/package/verdaccio-pacadmin)
 
 ## Requirements
 
 * verdaccio@4.x.x or higher
 
 ```
- npm install --global verdaccio-pacman
+ npm install --global verdaccio-pacadmin
 ```
 
 ## Usage
